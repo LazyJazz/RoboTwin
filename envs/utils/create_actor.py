@@ -10,6 +10,7 @@ def create_box(
     pose: sapien.Pose,
     half_size,
     color=None,
+    mat=None,
     name="",
 ) -> sapien.Entity:
     entity = sapien.Entity()
@@ -26,10 +27,16 @@ def create_box(
 
     # create render body for visualization
     render_component = sapien.render.RenderBodyComponent()
+    if color is not None:
+        render_mat = sapien.render.RenderMaterial(base_color=[*color[:3], 1])
+    elif mat is not None:
+        render_mat = mat
+    else:
+        raise NotImplementedError
     render_component.attach(
         # add a box visual shape with given size and rendering material
         sapien.render.RenderShapeBox(
-            half_size, sapien.render.RenderMaterial(base_color=[*color[:3], 1])
+            half_size, render_mat
         )
     )
 
