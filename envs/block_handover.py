@@ -33,7 +33,7 @@ class block_handover(Base_task):
             scene = self.scene,
             pose = rand_pos,
             half_size=(0.03,0.03,0.1),
-            mat=sapien.render.RenderMaterial(base_color=[1, 0, 0, 1], metallic=1, roughness=0.1),
+            color=(1, 0, 0),
             name="box"
         )
 

@@ -125,7 +125,7 @@ class Base_task(gym.Env):
         self.engine.set_renderer(self.renderer)
         
         sapien.render.set_camera_shader_dir("rt")
-        sapien.render.set_viewer_shader_dir("rt")
+        # sapien.render.set_viewer_shader_dir("rt")
         sapien.render.set_ray_tracing_samples_per_pixel(1)
         sapien.render.set_ray_tracing_path_depth(8)
         sapien.render.set_ray_tracing_denoiser("oidn")
