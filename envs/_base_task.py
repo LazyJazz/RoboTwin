@@ -74,6 +74,7 @@ class Base_Task(gym.Env):
         # Random
         random_setting = kwags.get("domain_randomization")
         self.random_background = random_setting.get("random_background", False)
+        self.back_ground_limit = random_setting.get("back_ground_limit", 9999)
         self.cluttered_table = random_setting.get("cluttered_table", False)
         self.clean_background_rate = random_setting.get("clean_background_rate", 1)
         self.random_head_camera_dis = random_setting.get("random_head_camera_dis", 0)
@@ -212,6 +213,7 @@ class Base_Task(gym.Env):
         self.engine.set_renderer(self.renderer)
 
         sapien.render.set_camera_shader_dir("rt")
+        # sapien.render.set_viewer_shader_dir("rt")
         sapien.render.set_ray_tracing_samples_per_pixel(32)
         sapien.render.set_ray_tracing_path_depth(8)
         sapien.render.set_ray_tracing_denoiser("oidn")
@@ -278,6 +280,7 @@ class Base_Task(gym.Env):
             directory_path = f"./assets/background_texture/{texture_type}"
             file_count = len(
                 [name for name in os.listdir(directory_path) if os.path.isfile(os.path.join(directory_path, name))])
+            file_count = min(file_count, self.back_ground_limit)
 
             # wall_texture, table_texture = random.randint(0, file_count - 1), random.randint(0, file_count - 1)
             wall_texture, table_texture = np.random.randint(0, file_count), np.random.randint(0, file_count)

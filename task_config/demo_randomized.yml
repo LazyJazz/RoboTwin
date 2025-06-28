@@ -1,4 +1,4 @@
-render_freq: 0
+render_freq: 1
 episode_num: 100
 use_seed: false
 save_freq: 15
@@ -7,6 +7,7 @@ embodiment:
 language_num: 100
 domain_randomization:
   random_background: true
+  back_ground_limit: 2
   cluttered_table: true
   clean_background_rate: 0.02
   random_head_camera_dis: 0
