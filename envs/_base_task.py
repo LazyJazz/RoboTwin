@@ -75,6 +75,7 @@ class Base_Task(gym.Env):
         random_setting = kwags.get("domain_randomization")
         self.random_background = random_setting.get("random_background", False)
         self.back_ground_limit = random_setting.get("back_ground_limit", 9999)
+        self.eval_on_seen = random_setting.get("eval_on_seen", False)
         self.cluttered_table = random_setting.get("cluttered_table", False)
         self.clean_background_rate = random_setting.get("clean_background_rate", 1)
         self.random_head_camera_dis = random_setting.get("random_head_camera_dis", 0)
@@ -276,7 +277,7 @@ class Base_Task(gym.Env):
         table_height += self.table_z_bias
 
         if self.random_background:
-            texture_type = "seen" if not self.eval_mode else "unseen"
+            texture_type = "seen" if ((not self.eval_mode) or self.eval_on_seen) else "unseen"
             directory_path = f"./assets/background_texture/{texture_type}"
             file_count = len(
                 [name for name in os.listdir(directory_path) if os.path.isfile(os.path.join(directory_path, name))])

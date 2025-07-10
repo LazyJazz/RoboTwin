@@ -50,5 +50,6 @@ python train.py --config-name=${config_name}.yaml \
                             setting=${task_config} \
                             expert_data_num=${expert_data_num} \
                             head_camera_type=$head_camera_type
+                            # training.resume=40\
                             # checkpoint.save_ckpt=${save_ckpt}
                             # hydra.run.dir=${run_dir} \

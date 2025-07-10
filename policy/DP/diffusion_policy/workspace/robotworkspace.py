@@ -61,9 +61,12 @@ class RobotWorkspace(BaseWorkspace):
         head_camera_type = cfg.head_camera_type
 
         # resume training
-        if cfg.training.resume:
-            lastest_ckpt_path = self.get_checkpoint_path()
+        if cfg.training.resume is not None:
+            save_name = pathlib.Path(self.cfg.task.dataset.zarr_path).stem
+            lastest_ckpt_path = pathlib.Path(f"checkpoints/{save_name}-{seed}/{cfg.training.resume}.ckpt")
+            print(f"Looking for latest checkpoint in {lastest_ckpt_path}")
             if lastest_ckpt_path.is_file():
+                self.epoch = cfg.training.resume - 1
                 print(f"Resuming from checkpoint {lastest_ckpt_path}")
                 self.load_checkpoint(path=lastest_ckpt_path)
 

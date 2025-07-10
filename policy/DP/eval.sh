@@ -7,7 +7,8 @@ task_config=${2}
 ckpt_setting=${3}
 expert_data_num=${4}
 seed=${5}
-gpu_id=${6}
+ckpt_num=${6}
+gpu_id=${7}
 DEBUG=False
 
 export CUDA_VISIBLE_DEVICES=${gpu_id}
@@ -22,4 +23,5 @@ python script/eval_policy.py --config policy/$policy_name/deploy_policy.yml \
     --task_config ${task_config} \
     --ckpt_setting ${ckpt_setting} \
     --expert_data_num ${expert_data_num} \
+    --checkpoint_num ${ckpt_num} \
     --seed ${seed}
